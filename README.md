@@ -1,13 +1,11 @@
 # App for Web Proxies
 
-
-
 ## Overview
 In many organizations, web proxies separate users from the Web at large. User web activity can often be a good indicator of possible compromise, phishing attempts, abuse, and outdated software. This app provides Splunk dashboards, forms, and reports which can be used to explore your web proxy events, and make sense of what can often be a large volume of data.
 
 To do this, the app relies on the Splunk Common Information Model (CIM) for Web events. This means that the app can report on any web proxy data, as long as it has been on-boarded properly, and is available through the Web data model.
 
-## A note on Spunk Data Model Acceleration and Disk Space
+## A note on Splunk Data Model Acceleration and Disk Space
 This app requires data model acceleration, which will use additional disk space. If you are using the Splunk App for Enterprise Security, this is already enabled, and should have been factored into your retention policies. If not, you should review the documentation on data model acceleration, how it uses disk space, and how to plan for it. This documentation can be found here: <http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk>
 
 ## A note on the Splunk Common Information Model
@@ -117,11 +115,14 @@ Support for this app is provided on a best-effort basis. We have released this a
 
 ## Changes
 
+### v1.2.1
+* Typo fix in the README.md
+
 ### v1.2
 * Reduced default search range to 24 hours (from 7 days) to prevent searching too much data
 * Corrected metadata (permissions) to remove the local.met
 * Added "About" page
-* Added docs section "A note on Spunk Data Model Acceleration and Disk Space"
+* Added docs section "A note on Splunk Data Model Acceleration and Disk Space"
 * Added more information about the individual forms, views, and dashboards
 
 ### v1.0
