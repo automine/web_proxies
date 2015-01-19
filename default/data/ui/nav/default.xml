@@ -1,0 +1,12 @@
+<nav search_view="search" color="#0971B2">
+  <view name="proxy_traffic_overview" default='true' />
+  <view name="user_profile" />
+  <view name="source_profile" />
+  <view name="category_profile" />
+  <view name="destination_profile" />
+  <view name="proxy_exceptions" />
+  <view name="user_agents" />
+  <view name="proxy_event_search" />
+  <view name="about" />
+  <view name="search" />
+</nav>

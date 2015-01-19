@@ -1,0 +1,25 @@
+category,wfa
+Adult/Mature Content,TRUE
+Child Pornography,TRUE
+Controlled Substances,TRUE
+Dynamic DNS Host,TRUE
+Extreme,TRUE
+Gambling,TRUE
+Hacking,TRUE
+Intimate Apparel/Swimsuit,TRUE
+Malicious Outbound Data/Botnets,TRUE
+Malicious Sources/Malnets,TRUE
+Mixed Content/Potentially Adult,TRUE
+Nudity,TRUE
+Peer-to-Peer (P2P),TRUE
+Phishing,TRUE
+Piracy/Copyright Concerns,TRUE
+Pornography,TRUE
+Potentially Unwanted Software,TRUE
+Proxy Avoidance,TRUE
+Remote Access Tools,TRUE
+Scam/Questionable/Illegal,TRUE
+Sexual Expression,TRUE
+Spam,TRUE
+Suspicious,TRUE
+Violence/Hate/Racism,TRUE

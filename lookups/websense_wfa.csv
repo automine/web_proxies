@@ -1,0 +1,38 @@
+category,wfa
+Dynamic DNS,TRUE
+Elevated Exposure,TRUE
+Emerging Exploits,TRUE
+Newly Registered Websites,TRUE
+Suspicious Content,TRUE
+Advanced Malware Command and Control,TRUE
+Advanced Malware Payloads,TRUE
+Botnets,TRUE
+Compromised Websites,TRUE
+Custom-Encrypted Uploads,TRUE
+Files Containing Passwords,TRUE
+Keyloggers,TRUE
+Malicious Embedded Link,TRUE
+Malicious Embedded Iframe,TRUE
+Malicious Websites,TRUE
+Mobile Malware,TRUE
+Phishing and Other Frauds,TRUE
+Potentially Exploited Documents,TRUE
+Potentially Unwanted Software,TRUE
+Spyware,TRUE
+Suspicious Embedded Link,TRUE
+Unauthorized Mobile Marketplaces,TRUE
+Peer-to-Peer File Sharing,TRUE
+Adult Material,TRUE
+Adult Content,TRUE
+Lingerie and Swimsuit,TRUE
+Nudity,TRUE
+Sex,TRUE
+Abused Drugs,TRUE
+Illegal or Questionable,TRUE
+Hacking,TRUE
+Proxy Avoidance,TRUE
+Intolerance,TRUE
+Militancy and Extremist,TRUE
+Parked Domain,TRUE
+Tasteless,TRUE
+Violence,TRUE

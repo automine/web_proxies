@@ -1,0 +1,92 @@
+<form>
+  <label>Policy Exceptions</label>
+  <description></description>
+  <fieldset submitButton="false">
+    <input type="time" token="field1">
+      <label></label>
+      <default>
+        <earliestTime>-7d@h</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Users</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where nodename=Web.Proxy AND ([| inputlookup `wfa_lookup` | fields category | rename category AS Web.category]) AND Web.user !="-" by Web.user Web.category | lookup `wfa_lookup` category AS Web.category | search wfa=TRUE | stats sum(count) as count by Web.user | rename Web.user AS user | sort - count | head 999</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			user_profile?earliest=$earliest$&latest=$latest$&form.user=$row.user$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Policy Exception Category Visits</title>
+        <searchString>| `web_proxy_tstats` count AS "Number of Events" dc(Web.user) AS "User Count" from datamodel=Web where nodename=Web.Proxy AND ([| inputlookup `wfa_lookup` | fields category | rename category AS Web.category]) by Web.category | lookup `wfa_lookup` category AS Web.category | search wfa=TRUE | rename Web.category AS category | fields - wfa | sort -  "User Count"</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			category_profile?earliest=$earliest$&latest=$latest$&form.category=$row.category$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Policy Exception User Activity Details</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where nodename=Web.Proxy AND ([| inputlookup `wfa_lookup` | fields category | rename category AS Web.category]) AND Web.user !="-" by Web.user Web.src Web.category Web.dest | lookup `wfa_lookup` category AS Web.category | search wfa=TRUE | stats sum(count) as count values(Web.src) as src values(Web.dest) as domains values(Web.category) as categories by Web.user | rename Web.user as user |  sort - count | fields user count src categories domains</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">10</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			user_profile?earliest=$earliest$&latest=$latest$&form.user=$row.user$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,220 @@
+<dashboard>
+  <label>About</label>
+  <description>About The App for Web Proxies</description>
+  <row>
+    <panel>
+      <html>
+        <ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#anoteonspunkdatamodelaccelerationanddiskspace">A note on Spunk Data Model Acceleration and Disk Space</a></li>
+<li><a href="#anoteonthesplunkcommoninformationmodel">A note on the Splunk Common Information Model</a></li>
+<li><a href="#availabledashboardsandforms">Available Dashboards and Forms</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#simpleinstallationprocess">Simple Installation Process</a></li>
+<li><a href="#customizingcategoriesforpolicyexceptions">Customizing Categories for Policy Exceptions</a></li>
+<li><a href="#customizinguser-agentlookups">Customizing user-agent lookups</a></li>
+<li><a href="#aboutsupportforthisapp">About support for this app</a></li>
+<li><a href="#changes">Changes</a></li>
+<li><a href="#references">References</a></li>
+  <li><a href="#credits">Credits</a></li>
+        </ul>
+          
+        <h2><a name="overview"></a>Overview</h2>
+
+<p>In many organizations, web proxies separate users from the Web at large. User web activity can often be a good indicator of possible compromise, phishing attempts, abuse, and outdated software. This app provides Splunk dashboards, forms, and reports which can be used to explore your web proxy events, and make sense of what can often be a large volume of data.</p>
+
+<p>To do this, the app relies on the Splunk Common Information Model (CIM) for Web events. This means that the app can report on any web proxy data, as long as it has been on-boarded properly, and is available through the Web data model.</p>
+
+<h2><a name="anoteonspunkdatamodelaccelerationanddiskspace"></a>A note on Spunk Data Model Acceleration and Disk Space</h2>
+
+<p>This app requires data model acceleration, which will use additional disk space. If you are using the Splunk App for Enterprise Security, this is already enabled, and should have been factored into your retention policies. If not, you should review the documentation on data model acceleration, how it uses disk space, and how to plan for it. This documentation can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk">http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk</a></p>
+
+<h2><a name="anoteonthesplunkcommoninformationmodel"></a>A note on the Splunk Common Information Model</h2>
+
+<p>As mentioned above, the app uses the CIM for web events. The CIM allows you to take events from a number of sources or products, and report on them in one cohesive manner, using a common set of names for fields and event types.</p>
+
+<h2><a name="availabledashboardsandforms"></a>Available Dashboards and Forms</h2>
+
+<p>These are the dashboards and forms currently present in the app:</p>
+
+<h3 id="proxytrafficoverview">Proxy Traffic Overview</h3>
+
+<p>This dashboard serves as a jumping-off point for exploring your web proxy data. It includes panels for traffic over time, categories, top talkers, and users. Clicking on panels in this dashboard will drill down to the appropriate profile page for further exploration.</p>
+
+<h3 id="userprofile">User Profile</h3>
+
+<p>This form provides panels based on a user&#8217;s activity, including source IP addresses, category history, and destinations. By focusing on a particular user, you can see browsing activity, generate a report for HR, or see where a user may have become infected.</p>
+
+<h3 id="sourceprofile">Source Profile</h3>
+
+<p>This form provides panels based on source IP addresses, often the user&#8217;s computer or servers. This includes activity over time, categories, users, user agents, and destinations. Use this form when you need to see what sites a particular IP has been visiting, which is useful if you find an un-authenticated session which is attempting to visit different sites.</p>
+
+<h3 id="categoryprofile">Category Profile</h3>
+
+<p>This form provides panels based on a category. This includes requests over time, destinations, users, and sources. If particular categories are of concern for your organization, you can use this form to find users or systems which have visited the category.</p>
+
+<h3 id="destinationprofile">Destination Profile</h3>
+
+<p>This form provides panels based on destination, which may be a hostname or IP address. This includes URLs, categories, users, and sources. Using this form allows you to see what users visited a particular site, and which URLs are popular with your users. On sites which are categorized based on different URLs, you can see all of the categories for visits to the destination.If you know of a compromised site (such as a watering hole attack), you can use this form to quickly find users and systems which may have visited it.</p>
+
+<h3 id="policyexceptions">Policy Exceptions</h3>
+
+<p>This dashboard shows users going to &#8220;bad&#8221; categories, showing the categories and user activity. Note that the selection of &#8220;bad&#8221; categories, which often changes from organization to organization, can be customized by following the steps in the section titled &#8220;Customizing Categories for Policy Exceptions&#8221;. Using this dashboard can highlight users which may be violating your organization&#8217;s usage agreement or systems which may be compromised. </p>
+
+<h3 id="useragents">User Agents</h3>
+
+<p>This dashboard provides analysis of the user-agent strings present in the web proxy events. To do this, the dashboard searches use a lookup which parses the user-agent strings. There are other lookups which perform this function, but TA-user-agents is used by default. For information on customizing the lookup being used, see the section titled &#8220;Customizing user-agent lookups&#8221;. Using this dashboard will help you find outdated or unauthorized browsers/software in your environment. Additionally, because some malware either modifies user-agent strings, or have their own, you may find compromised systems on your network.</p>
+
+<h3 id="proxyeventsearch">Proxy Event Search</h3>
+
+<p>This form provides an easy way to search proxy events for particular activity.If you already know what you are looking for, this form makes it easy to generate a search that return the events you need. Don&#8217;t forget that you can use the &#8220;search&#8221; icon at the bottom of the events panel to open the search in the Splunk search interface.</p>
+
+<h3 id="about">About</h3>
+
+<p>A simple HTML version of this document.</p>
+
+<h2><a name="prerequisites"></a>Prerequisites</h2>
+
+<h3 id="splunkversions">Splunk Versions</h3>
+
+<p>This app has been tested with Splunk versions 6.0.x, 6.1.x, and 6.2.x. This app should be installed on the same search head on which the web data model has been accelerated.</p>
+
+<h3 id="splunkcommoninformationmodeladd-on">Splunk Common Information Model Add-on</h3>
+
+        <p>This app depends on data models included in the Splunk Common Information Model Add-on, specifically the &#8220;Web&#8221; data model. Information on installing and using the Splunk Common Information Model Add-on can be found here: <a href="http://docs.splunk.com/Documentation/CIM/latest/User/Install">http://docs.splunk.com/Documentation/CIM/latest/User/Install</a>. Information on configuring the acceleration on the data model can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Enable_persistent_acceleration_for_a_data_model">http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Enable_persistent_acceleration_for_a_data_model</a>.</p>
+
+<p>The Splunk Common Information Model Add-on can be downloaded from here: <a href="https://apps.splunk.com/app/1621/">https://apps.splunk.com/app/1621/</a></p>
+
+<p>This app has been tested with versions 3, 3.1, and 4.1 of the CIM add-on. </p>
+
+<h3 id="datamodelaccelerationonthewebdatamodel">Data model Acceleration on the Web data model</h3>
+
+<p>In order to make the app respond and load quickly, accelerated data models are used to provide summary data. For this data to be available, the Web data model must be accelerated. Information on how to enable acceleration for the Web data model can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Managedatamodels#Enable_data_model_acceleration">http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Managedatamodels#Enable_data_model_acceleration</a></p>
+
+<h3 id="user-agentsadd-on">User-agents Add-on</h3>
+
+<p>User-agent strings are very difficult to parse efficiently using regular expressions. To make this easier and faster, an external lookup is used. Be default, the TA-user-agents is used, as it requires no additional data download or internet access. TA-user-agents can be downloaded from here: <a href="https://apps.splunk.com/app/1843/">https://apps.splunk.com/app/1843/</a></p>
+
+<p>The user-agent lookup being used can be customized. See the section titled &#8220;Customizing user-agent lookups&#8221; for more information.</p>
+
+<h2><a name="installation"></a>Installation</h2>
+
+<p>This app should be installed on a search head where the Web data model has been accelerated. More information on installing or upgrading Splunk apps can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Admin/Wheretogetmoreapps">http://docs.splunk.com/Documentation/Splunk/latest/Admin/Wheretogetmoreapps</a></p>
+
+<p><strong>Note</strong>: This app will require a restart of Splunk.</p>
+        
+        <h2><a name="simpleinstallationprocess"></a>Simple Installation Process</h2>
+
+<ol>
+<li>Make sure the field extractions and tags on your proxy events are correct.</li>
+<li>Install the Splunk Common Information Model Add-on (skip if you are installing on an ES search head).</li>
+<li>Install the TA-user-agents Add-on.</li>
+<li>Install the App for Web Proxies. Restart Splunk.</li>
+<li>Enable accelerations on the Web data model (skip if you are installing on an ES search head).</li>
+<li>Wait for the accelerations to start. After the acceleration searches have run, you should start seeing the dashboards populate.</li>
+</ol>
+
+<h2><a name="customizingcategoriesforpolicyexceptions"></a>Customizing Categories for Policy Exceptions</h2>
+
+<p>Not all organizations are the same, so there is a good chance that the default &#8220;bad&#8221; categories will need to be customized to meet the needs and policies of your organization. Additionally, customizations may be required based on the type of web proxy device generating the events.</p>
+
+<h3 id="adjustingthelookupforthevendorandproduct">Adjusting the lookup for the vendor and product</h3>
+
+<p>Different web proxy vendors is different category names, so one list wouldn&#8217;t cover all vendors. To enable support for different vendors, a macro named <code>wfa_lookup</code> is used. </p>
+
+<p>Currently this app comes pre-configured with lookups for 7 different products:</p>
+
+<ul>
+<li>Barracuda: <code>barracuda_wfa</code></li>
+<li>Bluecoat (default): <code>bluecoat_wfa</code></li>
+<li>Cisco WSA: <code>cisco_wsa_wfa</code></li>
+<li>McAfee Web Gateway: <code>mcafee_wg_wfa</code></li>
+<li>Palo Alto Firewalls: <code>palo_alto_wfa</code></li>
+<li>URLBlacklist: <code>urlblacklist_wfa</code></li>
+<li>Websense: <code>websense_wfa</code></li>
+</ul>
+
+<p>These lookup files can be found in <code>$SPLUNK_HOME/etc/apps/web_proxies/lookups</code>.</p>
+
+<p>To configure the app to use the correct lookup for your data, edit the <code>wfa_lookup</code> macro to match the vendor from the list above. More information on editing Splunk macros can be found in the Splunk documentation: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Search/Usesearchmacros">http://docs.splunk.com/Documentation/Splunk/latest/Search/Usesearchmacros</a>.</p>
+
+<p><strong>Note</strong>: While Splunk has configuration layering for configuration files, it does not have the same layering for lookup files. This means that if you customize one of these lookup files instead of creating your own, you need to make sure to back it up before upgrading this app, as it may be overwritten.</p>
+
+<h3 id="creatingyourownlookuporcustomizinganexistingone">Creating your own lookup, or customizing an existing one</h3>
+
+<p>Because your organizations policies may differ from what is represented in the provided lookups, or you may be using a product which is not listed above, you may wish to use your own custom lookup for Policy Exceptions. A custom lookup for Policy Exceptions should have two columns, &#8220;category&#8221; and &#8220;wfa&#8221;. The category column should match the name of the category produced by your proxy device to which visits from clients are not allowed, or need to be reviewed. The second column, &#8220;wfa&#8221;, should always have a value of &#8220;TRUE&#8221;. You can always look at the existing lookups for an example. More information on create a lookup in Splunk can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Addfieldsfromexternaldatasources">http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Addfieldsfromexternaldatasources</a>.</p>
+
+<p>Once you have created your lookup, edit the <code>wfa_lookup</code> macro with the name of the lookup you have created. Information on editing macros in Splunk can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Search/Usesearchmacros">http://docs.splunk.com/Documentation/Splunk/latest/Search/Usesearchmacros</a>.</p>
+
+<h3 id="usingwildcardsincategorylookups">Using Wildcards in category lookups</h3>
+
+<p>The use of wildcards for the lookup file is not configured out of the box, however, it can by copying the <code>transforms.conf</code> file from the <code>/default</code> directory to the <code>/local</code> directory and adjusting the configuration of the <code>web_proxies_wfa</code> lookup. More information can be found here: <a href="http://answers.splunk.com/answers/52580/can-we-use-wild-characters-in-lookup-table.html#answer-52581">http://answers.splunk.com/answers/52580/can-we-use-wild-characters-in-lookup-table.html#answer-52581</a></p>
+
+<h2><a name="customizinguser-agentlookups"></a>Customizing user-agent lookups</h2>
+
+<p>By default, this app uses an external lookup to provide analytics on user-agent string. The default lookup used is the <code>TA-user-agents</code> lookup, however, this can be customized to use another lookup which may be more accurate or provide more fields for customizing the dashboard.</p>
+
+<p>To customize the lookup, download and installed the other lookup. Copy the
+<code>macros.conf</code> file from the <code>/default</code> directory of the <code>web_proxies</code> app to a <code>web_proxies/local</code> directory (which you may need to create). Edit the <code>macros.conf</code> file, and edit the <code>user_agent_lookup</code> macro to be the name of the custom lookup, and then edit the <code>ua_family_field</code> to match the high-level product name (for example &#8220;IE&#8221; or &#8220;Firefox&#8221;). The use of the macros expect that the field being used for the lookup will be the CIM-compliant <code>http_user_agent</code>. If the lookup is expecting something else, then the dashboard will need to be customized to match.</p>
+
+<h2><a name="aboutsupportforthisapp"></a>About support for this app</h2>
+
+<p>Support for this app is provided on a best-effort basis. We have released this app for free, and want to help solve issues, and add features, but we also have day-jobs.</p>
+
+<h2><a name="changes"></a>Changes</h2>
+
+<h3 id="v1.2">v1.2</h3>
+
+<ul>
+<li>Reduced default search range to 24 hours (from 7 days) to prevent searching too much data</li>
+<li>Corrected metadata (permissions) to remove the local.met</li>
+<li>Added &#8220;About&#8221; page</li>
+<li>Added docs section &#8220;A note on Spunk Data Model Acceleration and Disk Space&#8221;</li>
+<li>Added more information about the individual forms, views, and dashboards</li>
+</ul>
+
+<h3 id="v1.0">v1.0</h3>
+
+<p>Initial release</p>
+
+<h2 id="references">References</h2>
+
+<h3 id="splunkcommoninformationmodel">Splunk Common Information Model</h3>
+
+<ul>
+<li>Splunk Common Information Model Add-on Docs: <a href="http://docs.splunk.com/Documentation/CIM/latest/User/Overview">http://docs.splunk.com/Documentation/CIM/latest/User/Overview</a></li>
+<li>Splunk Common Information Model Add-on Web data model: <a href="http://http://docs.splunk.com/Documentation/CIM/latest/User/Web">http://http://docs.splunk.com/Documentation/CIM/latest/User/Web</a></li>
+</ul>
+
+<h3 id="downloads">Downloads</h3>
+
+<ul>
+<li>Splunk Common Information Model Add-on Download: <a href="https://apps.splunk.com/app/1621/">https://apps.splunk.com/app/1621/</a></li>
+<li>TA-user-agents Add-on Download: <a href="https://apps.splunk.com/app/1843/">https://apps.splunk.com/app/1843/</a></li>
+</ul>
+
+<h3 id="webproxycategories">Web Proxy Categories</h3>
+
+<ul>
+<li>Barracuda Web Filter: <a href="https://techlib.barracuda.com/bwf/contentcategories">https://techlib.barracuda.com/bwf/contentcategories</a></li>
+<li>Blue Coat: <a href="https://sitereview.bluecoat.com/categories.jsp">https://sitereview.bluecoat.com/categories.jsp</a></li>
+<li>Cisco Web Security: <a href="http://www.cisco.com/c/en/us/products/collateral/security/web-security-appliance/datasheet_C78-718442.html">http://www.cisco.com/c/en/us/products/collateral/security/web-security-appliance/datasheet_C78-718442.html</a></li>
+<li>McAfee Web Gateway: <a href="http://www.trustedsource.org/download/ts_wd_reference_guide.pdf">http://www.trustedsource.org/download/ts_wd_reference_guide.pdf</a></li>
+<li>Palo Alto: <a href="https://urlfiltering.paloaltonetworks.com/CategoryList.aspx?AspxAutoDetectCookieSupport=1">https://urlfiltering.paloaltonetworks.com/CategoryList.aspx?AspxAutoDetectCookieSupport=1</a></li>
+<li>URLBlacklist: <a href="http://urlblacklist.com/?sec=download">http://urlblacklist.com/?sec=download</a></li>
+<li>Websense: <a href="http://www.websense.com/content/websense-url-categories.aspx">http://www.websense.com/content/websense-url-categories.aspx</a></li>
+</ul>
+
+<h2><a name="credits"></a>Credits</h2>
+
+<p>This app was created by David Shpritz of Aplura, LLC. <a href="http://www.aplura.com/consulting.html">http://www.aplura.com/consulting.html</a></p>
+
+<p>Thanks to other members of the Splunk Professional Services team, as well members of the #splunk IRC on effnet <a href="http://wiki.splunk.com/Community:IRC">http://wiki.splunk.com/Community:IRC</a></p>
+
+<p>Icon made by Freepik from http://www.flaticon.com is licensed under CC BY 3.0.</p>
+		
+      </html>
+    </panel>
+  </row>
+</dashboard>

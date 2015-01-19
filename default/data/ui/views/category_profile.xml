@@ -1,0 +1,194 @@
+<form>
+  <label>Category Profile</label>
+  <fieldset submitButton="true">
+    <input type="text" token="category">
+      <label>Category</label>
+    </input>
+    <input type="time" token="time_picker1">
+      <label/>
+      <default>
+        <earliestTime>-7d@h</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="drilldown">none</option>
+        <option name="underLabel">Requests</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <searchString>| `web_proxy_tstats` dc(Web.src) from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="drilldown">none</option>
+        <option name="underLabel">Sources</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <searchString>| `web_proxy_tstats` dc(Web.dest) from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="drilldown">none</option>
+        <option name="underLabel">Destinations</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <searchString>| `web_proxy_tstats` dc(Web.user) from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="drilldown">none</option>
+        <option name="underLabel">Users</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <searchString>| `web_proxy_tstats` sum(Web.bytes_in) as total_bytes_in from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy | eval in_in_gb = round(total_bytes_in/1024/1024/1024,2) | fields in_in_gb</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="drilldown">none</option>
+        <option name="afterLabel">gb</option>
+        <option name="underLabel">Traffic In</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <searchString>| `web_proxy_tstats` sum(Web.bytes_out) as total_bytes_out from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy | eval out_in_gb = round(total_bytes_out/1024/1024/1024,2) | fields out_in_gb</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="drilldown">none</option>
+        <option name="afterLabel">gb</option>
+        <option name="underLabel">Traffic Out</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Requests over time</title>
+        <searchString>| `web_proxy_tstats_pre` count from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy by _time Web.http_method | rename Web.http_method AS http_method | timechart count by http_method</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			proxy_event_search?earliest=$earliest$&latest=$latest$&form.category=$category$&form.http_method=$click.name2$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Destinations</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where Web.category ="$category$" AND nodename=Web.Proxy by Web.dest  | rename Web.dest AS dest</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">10</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			proxy_event_search?earliest=$earliest$&latest=$latest$&form.category=$category$&form.dest=$row.dest$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Requests by User</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy by Web.user | rename Web.user AS user | sort - count</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">10</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			proxy_event_search?earliest=$earliest$&latest=$latest$&form.category=$category$&form.user=$row.user$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Requests by Source</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where Web.category = "$category$" AND nodename=Web.Proxy by Web.src | rename Web.src AS src | sort - count</searchString>
+        <earliestTime>$time_picker1.earliest$</earliestTime>
+        <latestTime>$time_picker1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">10</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			proxy_event_search?earliest=$earliest$&latest=$latest$&form.src=$row.src$&form.category=$category$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

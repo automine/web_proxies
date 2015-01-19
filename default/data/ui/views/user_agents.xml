@@ -1,0 +1,117 @@
+<form>
+  <label>User Agents</label>
+  <description/>
+  <fieldset submitButton="false">
+    <input type="time" token="timepicker1" searchWhenChanged="true">
+      <label/>
+      <default>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>User Agent Families by Number of Requests</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where nodename=Web.Proxy by Web.http_user_agent Web.src | rename Web.* AS * | lookup `user_agent_lookup` http_user_agent | stats count by `ua_family_field` | sort - count</searchString>
+        <earliestTime>$timepicker1.earliest$</earliestTime>
+        <latestTime>$timepicker1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Systems with the Highest Number of User Agents</title>
+        <searchString>| `web_proxy_tstats` dc(Web.http_user_agent) as "User Agent Count" from datamodel=Web where nodename=Web.Proxy  by Web.src | rename Web.* AS * | sort - "User Agent Count" | head 20</searchString>
+        <earliestTime>$timepicker1.earliest$</earliestTime>
+        <latestTime>$timepicker1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">true</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			source_profile?earliest=$earliest$&latest=$latest$&form.src=$row.src$&form.time_picker1.earliest=$earliest$&form.time_picker1.latest=$latest$
+			]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top 20 User Agents by number of Systems</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where nodename=Web.Proxy  by Web.http_user_agent Web.src | rename Web.* AS * | lookup `user_agent_lookup` http_user_agent | `ua_info` | stats dc(src) AS "System Count"  by ua_info | sort - "System Count" | head 20</searchString>
+        <earliestTime>$timepicker1.earliest$</earliestTime>
+        <latestTime>$timepicker1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">log</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Un-parsed User Agents</title>
+        <searchString>| `web_proxy_tstats` count from datamodel=Web where nodename=Web.Proxy by Web.http_user_agent | rename Web.* AS *  | lookup `user_agent_lookup` http_user_agent| search `ua_family_field`=unknown  | table http_user_agent</searchString>
+        <earliestTime>$timepicker1.earliest$</earliestTime>
+        <latestTime>$timepicker1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">10</option>
+        <drilldown>
+          <link>
+            <![CDATA[
+			search?earliest=$earliest$&latest=$latest$&q=search%20index%3D*%20tag%3Dweb%20tag%3Dproxy%20%20http_user_agent%3D"$row.http_user_agent$"
+			]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>
