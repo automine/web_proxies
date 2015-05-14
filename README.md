@@ -128,6 +128,12 @@ Support for this app is provided on a best-effort basis. We have released this a
 ### v1.0
 Initial release
 
+### v1.2.1
+Small bug fixes
+
+### v1.2.2
+Removal of OSX files for App Certification
+
 ## References
 
 ### Splunk Common Information Model
