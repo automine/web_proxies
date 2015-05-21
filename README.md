@@ -134,6 +134,9 @@ Small bug fixes
 ### v1.2.2
 Removal of OSX files for App Certification
 
+### v1.2.3
+Fixed a typo in the websense lookup for waste fraud and abuse.
+
 ## References
 
 ### Splunk Common Information Model
