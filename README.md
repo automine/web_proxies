@@ -30,7 +30,7 @@ This form provides panels based on a category. This includes requests over time,
 This form provides panels based on destination, which may be a hostname or IP address. This includes URLs, categories, users, and sources. Using this form allows you to see what users visited a particular site, and which URLs are popular with your users. On sites which are categorized based on different URLs, you can see all of the categories for visits to the destination.If you know of a compromised site (such as a watering hole attack), you can use this form to quickly find users and systems which may have visited it.
 
 ### Policy Exceptions
-This dashboard shows users going to "bad" categories, showing the categories and user activity. Note that the selection of "bad" categories, which often changes from organization to organization, can be customized by following the steps in the section titled "Customizing Categories for Policy Exceptions". Using this dashboard can highlight users which may be violating your organization's usage agreement or systems which may be compromised. 
+This dashboard shows users going to "bad" categories, showing the categories and user activity. Note that the selection of "bad" categories, which often changes from organization to organization, can be customized by following the steps in the section titled "Customizing Categories for Policy Exceptions". Using this dashboard can highlight users which may be violating your organization's usage agreement or systems which may be compromised.
 
 ### User Agents
 This dashboard provides analysis of the user-agent strings present in the web proxy events. To do this, the dashboard searches use a lookup which parses the user-agent strings. There are other lookups which perform this function, but TA-user-agents is used by default. For information on customizing the lookup being used, see the section titled "Customizing user-agent lookups". Using this dashboard will help you find outdated or unauthorized browsers/software in your environment. Additionally, because some malware either modifies user-agent strings, or have their own, you may find compromised systems on your network.
@@ -51,7 +51,7 @@ This app depends on data models included in the Splunk Common Information Model 
 
 The Splunk Common Information Model Add-on can be downloaded from here: <https://apps.splunk.com/app/1621/>
 
-This app has been tested with versions 3, 3.1, and 4.1 of the CIM add-on. 
+This app has been tested with versions 3, 3.1, and 4.1 of the CIM add-on.
 
 ### Data model Acceleration on the Web data model
 In order to make the app respond and load quickly, accelerated data models are used to provide summary data. For this data to be available, the Web data model must be accelerated. Information on how to enable acceleration for the Web data model can be found here: <http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Managedatamodels#Enable_data_model_acceleration>
@@ -78,7 +78,7 @@ __Note__: This app will require a restart of Splunk.
 Not all organizations are the same, so there is a good chance that the default "bad" categories will need to be customized to meet the needs and policies of your organization. Additionally, customizations may be required based on the type of web proxy device generating the events.
 
 ### Adjusting the lookup for the vendor and product
-Different web proxy vendors is different category names, so one list wouldn't cover all vendors. To enable support for different vendors, a macro named `wfa_lookup` is used. 
+Different web proxy vendors is different category names, so one list wouldn't cover all vendors. To enable support for different vendors, a macro named `wfa_lookup` is used.
 
 Currently this app comes pre-configured with lookups for 7 different products:
 
@@ -107,11 +107,19 @@ The use of wildcards for the lookup file is not configured out of the box, howev
 ## Customizing user-agent lookups
 By default, this app uses an external lookup to provide analytics on user-agent string. The default lookup used is the `TA-user-agents` lookup, however, this can be customized to use another lookup which may be more accurate or provide more fields for customizing the dashboard.
 
-To customize the lookup, download and installed the other lookup. Copy the 
+To customize the lookup, download and installed the other lookup. Copy the
 `macros.conf` file from the `/default` directory of the `web_proxies` app to a `web_proxies/local` directory (which you may need to create). Edit the `macros.conf` file, and edit the `user_agent_lookup` macro to be the name of the custom lookup, and then edit the `ua_family_field` to match the high-level product name (for example "IE" or "Firefox"). The use of the macros expect that the field being used for the lookup will be the CIM-compliant `http_user_agent`. If the lookup is expecting something else, then the dashboard will need to be customized to match.
 
 ## About support for this app
 Support for this app is provided on a best-effort basis. We have released this app for free, and want to help solve issues, and add features, but we also have day-jobs.
+
+Need help? Use the Splunk community resources! I can be found on many of them:
+
+* [Splunk Answers](https://answers.splunk.com/)
+* [#splunk on Efnet IRC](https://wiki.splunk.com/Community:IRC)
+* [Splunk Slack channel](http://splunk402.com/chat/)
+
+The git repo for this app is located [here](https://github.com/automine/web_proxies).
 
 ## Changes
 
@@ -136,6 +144,9 @@ Removal of OSX files for App Certification
 
 ### v1.2.3
 Fixed a typo in the websense lookup for waste fraud and abuse.
+
+### v1.2.4
+Added more support into the the README for Splunk App Certification
 
 ## References
 
