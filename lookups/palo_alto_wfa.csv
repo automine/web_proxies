@@ -1,13 +1,13 @@
 category,wfa
-Abused Drugs,TRUE
-Adult,TRUE
-Gambling,TRUE
-Hacking,TRUE
-Malware,TRUE
-Nudity,TRUE
-Parked,TRUE
-Peer-to-Peer,TRUE
-Phishing,TRUE
-Proxy Avoidance and Anonymizers,TRUE
-Questionable,TRUE
-Swimsuits and Intimate Apparel,TRUE
+abused-drugs,TRUE
+adult,TRUE
+gambling,TRUE
+hacking,TRUE
+malware,TRUE
+nudity,TRUE
+parked,TRUE
+peer-to-peer,TRUE
+phishing,TRUE
+proxy-avoidance-and-anonymizers,TRUE
+questionable,TRUE
+swimsuits-and-intimate-apparel,TRUE
