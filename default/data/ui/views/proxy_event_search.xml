@@ -44,7 +44,7 @@
     <panel>
       <event>
         <title>Events</title>
-        <searchString>index=* tag=web tag=proxy user=$user$ src=$src$ dest=$dest$ category="$category$" action=$action$ http_method=$http_method$</searchString>
+        <searchString>index=* tag=web tag=proxy user="$user$" src=$src$ dest=$dest$ category="$category$" action=$action$ http_method=$http_method$</searchString>
         <earliestTime>$time1.earliest$</earliestTime>
         <latestTime>$time1.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
