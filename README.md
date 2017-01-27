@@ -124,6 +124,10 @@ The git repo for this app is located [here](https://github.com/automine/web_prox
 
 ## Changes
 
+### v1.2.6
+* Certification changes
+* removed linkView tags from XML views
+
 ### v1.2.5
 * Added Checkpoint lookup
 * Fixed issue with spaces in usernames

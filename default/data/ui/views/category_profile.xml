@@ -20,7 +20,6 @@
         <latestTime>$time_picker1.latest$</latestTime>
         <option name="drilldown">none</option>
         <option name="underLabel">Requests</option>
-        <option name="linkView">search</option>
       </single>
     </panel>
     <panel>
@@ -30,7 +29,6 @@
         <latestTime>$time_picker1.latest$</latestTime>
         <option name="drilldown">none</option>
         <option name="underLabel">Sources</option>
-        <option name="linkView">search</option>
       </single>
     </panel>
     <panel>
@@ -40,7 +38,6 @@
         <latestTime>$time_picker1.latest$</latestTime>
         <option name="drilldown">none</option>
         <option name="underLabel">Destinations</option>
-        <option name="linkView">search</option>
       </single>
     </panel>
     <panel>
@@ -50,7 +47,6 @@
         <latestTime>$time_picker1.latest$</latestTime>
         <option name="drilldown">none</option>
         <option name="underLabel">Users</option>
-        <option name="linkView">search</option>
       </single>
     </panel>
     <panel>
@@ -59,9 +55,7 @@
         <earliestTime>$time_picker1.earliest$</earliestTime>
         <latestTime>$time_picker1.latest$</latestTime>
         <option name="drilldown">none</option>
-        <option name="afterLabel">gb</option>
-        <option name="underLabel">Traffic In</option>
-        <option name="linkView">search</option>
+        <option name="underLabel">Traffic In (gb)</option>
       </single>
     </panel>
     <panel>
@@ -70,9 +64,7 @@
         <earliestTime>$time_picker1.earliest$</earliestTime>
         <latestTime>$time_picker1.latest$</latestTime>
         <option name="drilldown">none</option>
-        <option name="afterLabel">gb</option>
-        <option name="underLabel">Traffic Out</option>
-        <option name="linkView">search</option>
+        <option name="underLabel">Traffic Out (gb)</option>
       </single>
     </panel>
   </row>
