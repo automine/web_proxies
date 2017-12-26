@@ -124,6 +124,9 @@ The git repo for this app is located [here](https://github.com/automine/web_prox
 
 ## Changes
 
+### v1.2.7
+* Corrected the search behind the distinct users per source on the Source Profile page (thanks, Thomas!)
+
 ### v1.2.6
 * Certification changes
 * removed linkView tags from XML views
