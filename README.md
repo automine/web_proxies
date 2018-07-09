@@ -124,6 +124,10 @@ The git repo for this app is located [here](https://github.com/automine/web_prox
 
 ## Changes
 
+### v1.2.8
+* Fix typos in about.xml
+* added "allow_old_summaries" to tstats macros. Defaults to "true"
+
 ### v1.2.7
 * Corrected the search behind the distinct users per source on the Source Profile page (thanks, Thomas!)
 
