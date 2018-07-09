@@ -6,7 +6,7 @@
       <html>
         <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#anoteonspunkdatamodelaccelerationanddiskspace">A note on Spunk Data Model Acceleration and Disk Space</a></li>
+<li><a href="#anoteonsplunkdatamodelaccelerationanddiskspace">A note on Splunk Data Model Acceleration and Disk Space</a></li>
 <li><a href="#anoteonthesplunkcommoninformationmodel">A note on the Splunk Common Information Model</a></li>
 <li><a href="#availabledashboardsandforms">Available Dashboards and Forms</a></li>
 <li><a href="#prerequisites">Prerequisites</a></li>
@@ -19,14 +19,14 @@
 <li><a href="#references">References</a></li>
   <li><a href="#credits">Credits</a></li>
         </ul>
-          
+
         <h2><a name="overview"></a>Overview</h2>
 
 <p>In many organizations, web proxies separate users from the Web at large. User web activity can often be a good indicator of possible compromise, phishing attempts, abuse, and outdated software. This app provides Splunk dashboards, forms, and reports which can be used to explore your web proxy events, and make sense of what can often be a large volume of data.</p>
 
 <p>To do this, the app relies on the Splunk Common Information Model (CIM) for Web events. This means that the app can report on any web proxy data, as long as it has been on-boarded properly, and is available through the Web data model.</p>
 
-<h2><a name="anoteonspunkdatamodelaccelerationanddiskspace"></a>A note on Spunk Data Model Acceleration and Disk Space</h2>
+<h2><a name="anoteonsplunkdatamodelaccelerationanddiskspace"></a>A note on Splunk Data Model Acceleration and Disk Space</h2>
 
 <p>This app requires data model acceleration, which will use additional disk space. If you are using the Splunk App for Enterprise Security, this is already enabled, and should have been factored into your retention policies. If not, you should review the documentation on data model acceleration, how it uses disk space, and how to plan for it. This documentation can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk">http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Acceleratedatamodels#Data_model_summary_size_on_disk</a></p>
 
@@ -103,7 +103,7 @@
 <p>This app should be installed on a search head where the Web data model has been accelerated. More information on installing or upgrading Splunk apps can be found here: <a href="http://docs.splunk.com/Documentation/Splunk/latest/Admin/Wheretogetmoreapps">http://docs.splunk.com/Documentation/Splunk/latest/Admin/Wheretogetmoreapps</a></p>
 
 <p><strong>Note</strong>: This app will require a restart of Splunk.</p>
-        
+
         <h2><a name="simpleinstallationprocess"></a>Simple Installation Process</h2>
 
 <ol>
@@ -170,7 +170,7 @@
 <li>Reduced default search range to 24 hours (from 7 days) to prevent searching too much data</li>
 <li>Corrected metadata (permissions) to remove the local.met</li>
 <li>Added &#8220;About&#8221; page</li>
-<li>Added docs section &#8220;A note on Spunk Data Model Acceleration and Disk Space&#8221;</li>
+<li>Added docs section &#8220;A note on Splunk Data Model Acceleration and Disk Space&#8221;</li>
 <li>Added more information about the individual forms, views, and dashboards</li>
 </ul>
 
@@ -213,7 +213,7 @@
 <p>Thanks to other members of the Splunk Professional Services team, as well members of the #splunk IRC on effnet <a href="http://wiki.splunk.com/Community:IRC">http://wiki.splunk.com/Community:IRC</a></p>
 
 <p>Icon made by Freepik from http://www.flaticon.com is licensed under CC BY 3.0.</p>
-		
+
       </html>
     </panel>
   </row>
