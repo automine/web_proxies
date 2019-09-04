@@ -1,5 +1,8 @@
 # App for Web Proxies
 
+## Deprecation Warning!!!
+__This app has been deprecated. There will be no new development or bug fixes. It has been replaced by the [Aplura Web Proxies App for Splunk](https://splunkbase.splunk.com/app/4231/).__
+
 ## Overview
 In many organizations, web proxies separate users from the Web at large. User web activity can often be a good indicator of possible compromise, phishing attempts, abuse, and outdated software. This app provides Splunk dashboards, forms, and reports which can be used to explore your web proxy events, and make sense of what can often be a large volume of data.
 
@@ -123,6 +126,9 @@ Need help? Use the Splunk community resources! I can be found on many of them:
 The git repo for this app is located [here](https://github.com/automine/web_proxies).
 
 ## Changes
+
+### v1.2.9
+* Added deprecation warning and link to replacement.
 
 ### v1.2.8
 * Fix typos in about.xml
